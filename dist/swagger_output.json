@@ -1,0 +1,23 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "v0.1.0",
+        "title": "Unfolding Saion Backend",
+        "description": "Implementation of Swagger with TypeScript"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5000",
+            "description": ""
+        }
+    ],
+    "paths": {},
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
