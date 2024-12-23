@@ -7,15 +7,32 @@ const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_1 = __importDefault(require("express"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
-const swagger_output_json_1 = __importDefault(require("./swagger_output.json"));
+const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
+// import swaggerDocument from './swagger_output.json';
 const routes_1 = __importDefault(require("./routes"));
 const app = (0, express_1.default)();
 //parsers
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 app.use((0, cookie_parser_1.default)());
-console.log(swagger_output_json_1.default);
-app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_output_json_1.default));
+const swaggerOptions = {
+    swaggerDefinition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Unfolding Saion Backend',
+            version: '1.0.0',
+            description: 'A sample Express.js API built with TypeScript and Swagger',
+        },
+    },
+    apis: ['./src/routes/index.ts'],
+    encoding: 'utf-8',
+    failOnErrors: false,
+    verbose: true,
+    format: 'json',
+    definition: {},
+};
+const swaggerDocs = (0, swagger_jsdoc_1.default)(swaggerOptions);
+app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocs));
 // application routes
 app.use('/api/v1', routes_1.default);
 app.get('/', (req, res) => {

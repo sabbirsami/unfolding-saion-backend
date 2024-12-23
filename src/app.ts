@@ -31,12 +31,12 @@ const swaggerOptions = {
   definition: {},
 };
 
-const swaggerDocs = swaggerJsdoc(swaggerOptions);
+const swaggerDocs = swaggerJsdoc(swaggerOptions as object);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // application routes
-app.use('/api/v1', router);
+app.use('/api/', router);
 
 app.get('/', (req, res) => {
   res.send('Working');
