@@ -23,7 +23,7 @@ const swaggerOptions = {
       description: 'A sample Express.js API built with TypeScript and Swagger',
     },
   },
-  apis: ['./src/routes/index.ts'],
+  apis: ['./src/app/modules/user/user.route.ts'],
   encoding: 'utf-8',
   failOnErrors: false,
   verbose: true,
