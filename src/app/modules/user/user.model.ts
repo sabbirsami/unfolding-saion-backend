@@ -14,12 +14,12 @@ const userSchema = new Schema<TUser>(
       type: String,
       trim: true,
       unique: true,
-
       required: [true, 'Email is required'],
     },
     password: {
       type: String,
       required: [true, 'Password is required'],
+      select: 0,
     },
     role: {
       type: String,
