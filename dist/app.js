@@ -10,6 +10,7 @@ const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
 // import swaggerDocument from './swagger_output.json';
 const routes_1 = __importDefault(require("./routes"));
+const globalErrorHandler_1 = __importDefault(require("./app/middlewares/globalErrorHandler"));
 const app = (0, express_1.default)();
 //parsers
 app.use(express_1.default.json());
@@ -38,7 +39,7 @@ app.use('/api/', routes_1.default);
 app.get('/', (req, res) => {
     res.send('Working');
 });
-// app.use(globalErrorHandler);
+app.use(globalErrorHandler_1.default);
 // Not Found
 app.all('*', (req, res, next) => {
     const error = new Error(`Can't find ${req.originalUrl} route on the server`);
