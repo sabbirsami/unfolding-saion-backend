@@ -6,6 +6,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 // import swaggerDocument from './swagger_output.json';
 import router from './routes';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
 
 const app: Application = express();
 
@@ -42,7 +43,7 @@ app.get('/', (req, res) => {
   res.send('Working');
 });
 
-// app.use(globalErrorHandler);
+app.use(globalErrorHandler);
 
 // Not Found
 app.all('*', (req: Request, res: Response, next: NextFunction) => {
