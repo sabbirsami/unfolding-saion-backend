@@ -9,19 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserController = void 0;
-const http_status_codes_1 = require("http-status-codes");
-const catchAsync_1 = require("../../utils/catchAsync");
-const user_service_1 = require("./user.service");
-const createUser = (0, catchAsync_1.catchAsync)((req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_service_1.UserService.createUserIntoDB(req.body);
-    res.status(http_status_codes_1.StatusCodes.OK).json({
-        success: true,
-        message: 'User created successfully',
-        statusCode: http_status_codes_1.StatusCodes.OK,
-        data: { _id: result._id, name: result.name, email: result.email },
+exports.validateRequest = void 0;
+const validateRequest = (schema) => {
+    return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            yield schema.parseAsync({
+                body: req.body,
+            });
+            next();
+        }
+        catch (error) {
+            next(error);
+        }
     });
-}));
-exports.UserController = {
-    createUser,
 };
+exports.validateRequest = validateRequest;
