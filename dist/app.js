@@ -34,7 +34,7 @@ const swaggerOptions = {
 const swaggerDocs = (0, swagger_jsdoc_1.default)(swaggerOptions);
 app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocs));
 // application routes
-app.use('/api/v1', routes_1.default);
+app.use('/api/', routes_1.default);
 app.get('/', (req, res) => {
     res.send('Working');
 });
