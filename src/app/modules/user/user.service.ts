@@ -15,8 +15,9 @@ const createUserIntoDB = async (payload: TUser) => {
 
 const loginUser = async (payload: TLoginUser) => {
   const user = await User.isUserExistsByEmail(payload?.email);
+
   if (!user) {
-    throw new AppError(StatusCodes.NOT_FOUND, 'This user is not found !');
+    throw new AppError(StatusCodes.NOT_FOUND, 'This user is not found!');
   }
 
   const isDeleted = user?.isBlock;
@@ -28,6 +29,7 @@ const loginUser = async (payload: TLoginUser) => {
     throw new AppError(StatusCodes.FORBIDDEN, 'Password do not matched');
 
   const jwtPayload = {
+    userId: user._id,
     userEmail: user.email,
     role: user.role,
   };
