@@ -62,4 +62,9 @@ userSchema.statics.isUserExistsByEmail = function (email) {
         return yield exports.User.findOne({ email }).select('+password');
     });
 };
+userSchema.statics.isPasswordMatched = function (plainTextPassword, hashedPassword) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield bcrypt_1.default.compare(plainTextPassword, hashedPassword);
+    });
+};
 exports.User = (0, mongoose_1.model)('User', userSchema);
