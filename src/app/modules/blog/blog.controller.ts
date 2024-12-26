@@ -23,6 +23,19 @@ const createBlog = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateBlog = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const result = await BlogService.updateBlogFromDB(id, req.body);
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: 'Blog updated successfully',
+    statusCode: StatusCodes.OK,
+    data: result,
+  });
+});
+
 export const BlogController = {
   createBlog,
+  updateBlog,
 };

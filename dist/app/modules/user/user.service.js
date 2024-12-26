@@ -28,7 +28,7 @@ const createUserIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function
 const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield user_model_1.User.isUserExistsByEmail(payload === null || payload === void 0 ? void 0 : payload.email);
     if (!user) {
-        throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, 'This user is not found !');
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, 'This user is not found!');
     }
     const isDeleted = user === null || user === void 0 ? void 0 : user.isBlock;
     if (isDeleted) {
@@ -37,6 +37,7 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     if (!(yield user_model_1.User.isPasswordMatched(payload === null || payload === void 0 ? void 0 : payload.password, user === null || user === void 0 ? void 0 : user.password)))
         throw new AppError_1.default(http_status_codes_1.StatusCodes.FORBIDDEN, 'Password do not matched');
     const jwtPayload = {
+        userId: user._id,
         userEmail: user.email,
         role: user.role,
     };

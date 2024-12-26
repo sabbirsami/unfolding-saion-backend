@@ -13,11 +13,14 @@ const BlogSchema = new mongoose_1.Schema({
     },
     author: {
         type: mongoose_1.Schema.Types.ObjectId,
-        required: [true, 'Title is required'],
+        ref: 'User',
+        required: [true, 'Author is required'],
     },
     isPublished: {
         type: Boolean,
         default: true,
     },
+}, {
+    timestamps: true,
 });
 exports.BlogModel = (0, mongoose_1.model)('Blog', BlogSchema);

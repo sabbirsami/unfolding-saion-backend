@@ -62,6 +62,11 @@ userSchema.statics.isUserExistsByEmail = function (email) {
         return yield exports.User.findOne({ email }).select('+password');
     });
 };
+userSchema.statics.isUserExistsById = function (id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield exports.User.findOne({ _id: id }).select('+password');
+    });
+};
 userSchema.statics.isPasswordMatched = function (plainTextPassword, hashedPassword) {
     return __awaiter(this, void 0, void 0, function* () {
         return yield bcrypt_1.default.compare(plainTextPassword, hashedPassword);

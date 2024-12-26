@@ -13,5 +13,11 @@ router.post(
   auth(USER_ROLE.user, USER_ROLE.admin),
   BlogController.createBlog
 );
+router.patch(
+  '/:id',
+  validateRequest(BlogValidation.updateBlogValidationSchema),
+  auth(USER_ROLE.user, USER_ROLE.admin),
+  BlogController.updateBlog
+);
 
 export const BlogRouter = router;

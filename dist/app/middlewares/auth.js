@@ -25,8 +25,8 @@ const auth = (...requiredRoles) => {
             throw new AppError_1.default(http_status_codes_1.StatusCodes.UNAUTHORIZED, 'You are not authorized!');
         }
         const decoded = jsonwebtoken_1.default.verify(token, config_1.default.jwt_access_secret);
-        const { role, userId } = decoded;
-        const user = yield user_model_1.User.isUserExistsByEmail(userId);
+        const { role, userEmail } = decoded;
+        const user = yield user_model_1.User.isUserExistsByEmail(userEmail);
         if (!user) {
             throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, 'This user is not found!');
         }
