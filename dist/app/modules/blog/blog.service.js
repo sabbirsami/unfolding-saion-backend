@@ -8,8 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlogService = void 0;
+const http_status_codes_1 = require("http-status-codes");
+const AppError_1 = __importDefault(require("../../error/AppError"));
 const blog_model_1 = require("./blog.model");
 const createBlogIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const blog = yield blog_model_1.BlogModel.create(payload);
@@ -18,6 +23,22 @@ const createBlogIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function
         .select('-isPublished -updatedAt -createdAt');
     return result;
 });
+const updateBlogFromDB = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const isBlogExists = yield blog_model_1.BlogModel.findById(id);
+    if (!isBlogExists) {
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, 'Blog not found');
+    }
+    if (payload.isPublished) {
+        throw new AppError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, 'Blog not found');
+    }
+    const blog = yield blog_model_1.BlogModel.findByIdAndUpdate(id, payload, {
+        new: true,
+    })
+        .populate('author', 'name email')
+        .select('-isPublished -updatedAt -createdAt');
+    return blog;
+});
 exports.BlogService = {
     createBlogIntoDB,
+    updateBlogFromDB,
 };
