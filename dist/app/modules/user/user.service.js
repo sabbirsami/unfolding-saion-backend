@@ -15,9 +15,14 @@ const createUserIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function
     // Set User Role
     payload.role = 'user';
     // insert into db
-    const result = yield user_model_1.UserModel.create(payload);
+    const result = yield user_model_1.User.create(payload);
     return result;
+});
+const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield user_model_1.User.isUserExistsByEmail(payload === null || payload === void 0 ? void 0 : payload.email);
+    console.log(user);
 });
 exports.UserService = {
     createUserIntoDB,
+    loginUser,
 };

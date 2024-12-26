@@ -19,6 +19,19 @@ const createUserValidationSchema = zod_1.z.object({
         }),
     }),
 });
+const loginUserValidationSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        email: zod_1.z
+            .string({
+            required_error: 'Email is required',
+        })
+            .email('Invalid email format'),
+        password: zod_1.z.string({
+            required_error: 'Password is required',
+        }),
+    }),
+});
 exports.UserValidation = {
     createUserValidationSchema,
+    loginUserValidationSchema,
 };

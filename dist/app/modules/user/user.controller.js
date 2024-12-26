@@ -22,6 +22,16 @@ const createUser = (0, catchAsync_1.catchAsync)((req, res, _next) => __awaiter(v
         data: { _id: result._id, name: result.name, email: result.email },
     });
 }));
+const loginUser = (0, catchAsync_1.catchAsync)((req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_service_1.UserService.loginUser(req.body);
+    res.status(http_status_codes_1.StatusCodes.OK).json({
+        success: true,
+        message: 'User created successfully',
+        statusCode: http_status_codes_1.StatusCodes.OK,
+        data: result,
+    });
+}));
 exports.UserController = {
     createUser,
+    loginUser,
 };

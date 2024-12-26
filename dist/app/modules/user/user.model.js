@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModel = void 0;
+exports.User = void 0;
 /* eslint-disable @typescript-eslint/no-this-alias */
 const mongoose_1 = require("mongoose");
 const bcrypt_1 = __importDefault(require("bcrypt"));
@@ -57,4 +57,9 @@ userSchema.post('save', function (doc, next) {
         next();
     });
 });
-exports.UserModel = (0, mongoose_1.model)('User', userSchema);
+userSchema.statics.isUserExistsByEmail = function (email) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield exports.User.findOne({ email }).select('+password');
+    });
+};
+exports.User = (0, mongoose_1.model)('User', userSchema);
