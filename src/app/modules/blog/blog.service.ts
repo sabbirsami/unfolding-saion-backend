@@ -23,15 +23,28 @@ const updateBlogFromDB = async (id: string, payload: TBlog) => {
     throw new AppError(StatusCodes.NOT_FOUND, 'Blog not found');
   }
 
-  const blog = await BlogModel.findByIdAndUpdate(id, payload, {
+  const result = await BlogModel.findByIdAndUpdate(id, payload, {
     new: true,
   })
     .populate('author', 'name email')
     .select('-isPublished -updatedAt -createdAt');
-  return blog;
+  return result;
+};
+
+const deleteBlogFromDB = async (id: string) => {
+  const isBlogExists = await BlogModel.findById(id);
+
+  if (!isBlogExists) {
+    throw new AppError(StatusCodes.NOT_FOUND, 'Blog not found');
+  }
+
+  const result = await BlogModel.findByIdAndUpdate(id, { isPublished: false });
+
+  return result;
 };
 
 export const BlogService = {
   createBlogIntoDB,
   updateBlogFromDB,
+  deleteBlogFromDB,
 };
