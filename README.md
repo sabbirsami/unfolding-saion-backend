@@ -19,7 +19,7 @@ Ensure you have the following installed:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-repo/unfolding-saion-backend
+   git clone https://github.com/sabbirsami/unfolding-saion-backend
    ```
 2. **Navigate to the project directory:**
    ```bash
@@ -37,8 +37,13 @@ Ensure you have the following installed:
 1. Create a `.env` file in the root directory and define the following environment variables:
    ```env
    PORT=5000
+   NODE_ENV=<environment>
+   BCRYPT_SALT_ROUNDS=<number>
+   JWT_ACCESS_SECRET=<your-secret-key>
    DATABASE_URL=<your-mongodb-uri>
-   JWT_SECRET=<your-secret-key>
+   JWT_REFRESH_SECRET=<your-secret-key>
+   JWT_ACCESS_EXPIRES_IN=<expire-time>
+   JWT_REFRESH_EXPIRES_IN=<expire-time>
    ```
    Replace `<your-mongodb-uri>` with your MongoDB connection URI and `<your-secret-key>` with a secure secret key.
 
