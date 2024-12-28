@@ -120,6 +120,9 @@ Ensure you have the following installed:
 
 ### API Endpoints
 
+#### Doc
+- **Swagger /api-docs**: Swagger Doc.
+
 #### Authentication
 - **POST /api/auth/register**: Register a new user.
 - **POST /api/auth/login**: Login and receive a JWT.
